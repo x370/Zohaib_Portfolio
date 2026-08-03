@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import {
   FiGithub,
   FiLinkedin,
@@ -13,6 +12,16 @@ import { personal } from "@/lib/data";
 
 export default function Footer() {
   const year = new Date().getFullYear();
+
+  const scrollToSection = (e, targetId) => {
+    e.preventDefault();
+    const element = document.getElementById(targetId);
+    if (element) {
+      const yOffset = -70;
+      const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      window.scrollTo({ top: y, behavior: "smooth" });
+    }
+  };
 
   return (
     <footer className="border-t border-border bg-surface mt-16">
@@ -29,7 +38,7 @@ export default function Footer() {
             </div>
             <p className="text-sm text-muted leading-relaxed max-w-xs">
               Full-Stack Developer based in Lahore, Pakistan. Building scalable,
-              production-grade web applications.
+              production-grade web applications & AI integrations.
             </p>
             {/* Socials */}
             <div className="flex gap-2 mt-4">
@@ -60,13 +69,14 @@ export default function Footer() {
             <ul className="space-y-2 text-sm">
               {["About", "Skills", "Experience", "Projects", "Contact"].map((l) => (
                 <li key={l}>
-                  <Link
-                    href={`/${l.toLowerCase()}`}
-                    className="text-muted hover:text-primary inline-flex items-center gap-1 transition-colors"
+                  <a
+                    href={`#${l.toLowerCase()}`}
+                    onClick={(e) => scrollToSection(e, l.toLowerCase())}
+                    className="text-muted hover:text-primary inline-flex items-center gap-1 transition-colors cursor-pointer"
                   >
                     {l}
                     <FiArrowUpRight size={12} className="opacity-0 group-hover:opacity-100" />
-                  </Link>
+                  </a>
                 </li>
               ))}
             </ul>

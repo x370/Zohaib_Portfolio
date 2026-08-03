@@ -1,7 +1,5 @@
 "use client";
 
-import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { HiBars3, HiXMark } from "react-icons/hi2";
 import { FiGithub, FiLinkedin, FiMail } from "react-icons/fi";
@@ -9,28 +7,40 @@ import ThemeToggle from "./ThemeToggle";
 import { personal } from "@/lib/data";
 
 const links = [
-  { href: "/", label: "Home" },
-  { href: "/about", label: "About" },
-  { href: "/skills", label: "Skills" },
-  { href: "/experience", label: "Experience" },
-  { href: "/projects", label: "Projects" },
-  { href: "/contact", label: "Contact" },
+  { href: "#hero", label: "Home" },
+  { href: "#about", label: "About" },
+  { href: "#skills", label: "Skills" },
+  { href: "#experience", label: "Experience" },
+  { href: "#projects", label: "Projects" },
+  { href: "#contact", label: "Contact" },
 ];
 
 export default function Navbar() {
-  const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("hero");
 
   useEffect(() => {
-    const handle = () => setScrolled(window.scrollY > 20);
-    handle();
-    window.addEventListener("scroll", handle, { passive: true });
-    return () => window.removeEventListener("scroll", handle);
-  }, []);
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
 
-  // Close sidebar on route change
-  useEffect(() => { setOpen(false); }, [pathname]);
+      // Section observer logic for active link
+      const sectionIds = ["hero", "about", "skills", "experience", "projects", "contact"];
+      const scrollPosition = window.scrollY + 120;
+
+      for (let i = sectionIds.length - 1; i >= 0; i--) {
+        const section = document.getElementById(sectionIds[i]);
+        if (section && section.offsetTop <= scrollPosition) {
+          setActiveSection(sectionIds[i]);
+          break;
+        }
+      }
+    };
+
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   // Disable body scroll when sidebar drawer is open
   useEffect(() => {
@@ -41,6 +51,18 @@ export default function Navbar() {
     }
     return () => { document.body.style.overflow = ""; };
   }, [open]);
+
+  const scrollToSection = (e, href) => {
+    e.preventDefault();
+    setOpen(false);
+    const targetId = href.replace("#", "");
+    const element = document.getElementById(targetId);
+    if (element) {
+      const yOffset = -70; // Header offset
+      const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      window.scrollTo({ top: y, behavior: "smooth" });
+    }
+  };
 
   return (
     <>
@@ -55,7 +77,11 @@ export default function Navbar() {
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <nav className="flex items-center justify-between h-16 gap-2">
             {/* Brand Logo */}
-            <Link href="/" className="flex items-center gap-2.5 group shrink-0">
+            <a
+              href="#hero"
+              onClick={(e) => scrollToSection(e, "#hero")}
+              className="flex items-center gap-2.5 group shrink-0"
+            >
               <div className="h-9 w-9 rounded-xl bg-primary grid place-items-center shadow-md shadow-primary/20 group-hover:scale-105 transition-transform shrink-0">
                 <span className="font-bold text-white text-sm">ZS</span>
               </div>
@@ -63,30 +89,32 @@ export default function Navbar() {
                 <span className="font-bold text-sm leading-none text-fg">Zohaib Safdar</span>
                 <span className="text-[10px] text-muted font-medium mt-0.5 hidden sm:block">Full-Stack Developer</span>
               </div>
-            </Link>
+            </a>
 
-            {/* Desktop Navigation Links (Visible on lg: 1024px+) */}
+            {/* Desktop Navigation Links (Section Scrolling) */}
             <ul className="hidden lg:flex items-center gap-1 bg-surface/80 border border-border/60 rounded-full px-3 py-1.5 shadow-sm">
               {links.map((l) => {
-                const active = pathname === l.href;
+                const sectionId = l.href.replace("#", "");
+                const active = activeSection === sectionId;
                 return (
                   <li key={l.href}>
-                    <Link
+                    <a
                       href={l.href}
-                      className={`relative px-4 py-1.5 rounded-full text-xs font-semibold transition-all ${
+                      onClick={(e) => scrollToSection(e, l.href)}
+                      className={`relative px-4 py-1.5 rounded-full text-xs font-semibold transition-all cursor-pointer ${
                         active
                           ? "text-white bg-primary shadow-sm shadow-primary/30"
                           : "text-muted hover:text-fg hover:bg-fg/5"
                       }`}
                     >
                       {l.label}
-                    </Link>
+                    </a>
                   </li>
                 );
               })}
             </ul>
 
-            {/* Right Controls (Theme toggle & Hamburger button) */}
+            {/* Right Controls */}
             <div className="flex items-center gap-2 shrink-0">
               <ThemeToggle />
               {/* Hamburger Button for Mobile & Tablet */}
@@ -142,12 +170,13 @@ export default function Navbar() {
               </p>
               <nav className="space-y-1">
                 {links.map((l) => {
-                  const active = pathname === l.href;
+                  const sectionId = l.href.replace("#", "");
+                  const active = activeSection === sectionId;
                   return (
-                    <Link
+                    <a
                       key={l.href}
                       href={l.href}
-                      onClick={() => setOpen(false)}
+                      onClick={(e) => scrollToSection(e, l.href)}
                       className={`flex items-center justify-between px-4 py-3 rounded-xl text-sm font-semibold transition-all ${
                         active
                           ? "bg-primary text-white shadow-md shadow-primary/20"
@@ -156,13 +185,13 @@ export default function Navbar() {
                     >
                       <span>{l.label}</span>
                       {active && <span className="h-2 w-2 rounded-full bg-white" />}
-                    </Link>
+                    </a>
                   );
                 })}
               </nav>
             </div>
 
-            {/* Bottom Drawer Footer (Socials & Quick Info) */}
+            {/* Bottom Drawer Footer */}
             <div className="pt-6 border-t border-border mt-6">
               <p className="text-[10px] font-bold uppercase tracking-wider text-muted mb-3 px-1">
                 Connect With Me

@@ -1,8 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import {
   FiArrowRight,
   FiDownload,
@@ -14,8 +12,18 @@ import {
 import { personal } from "@/lib/data";
 
 export default function Hero() {
+  const scrollToSection = (e, targetId) => {
+    e.preventDefault();
+    const element = document.getElementById(targetId);
+    if (element) {
+      const yOffset = -70;
+      const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      window.scrollTo({ top: y, behavior: "smooth" });
+    }
+  };
+
   return (
-    <section className="min-h-[100svh] flex items-center pt-24 pb-16">
+    <section id="hero" className="min-h-[90vh] flex items-center pt-24 pb-16">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 w-full">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
 
@@ -28,7 +36,7 @@ export default function Hero() {
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-green-500" />
               </span>
               <span className="text-xs font-medium text-green-700 dark:text-green-400">
-                Available for new projects
+                Available for new projects & full-time roles
               </span>
             </div>
 
@@ -64,24 +72,26 @@ export default function Hero() {
 
             {/* CTAs */}
             <div className="flex flex-wrap gap-3">
-              <Link
-                href="/projects"
+              <a
+                href="#projects"
+                onClick={(e) => scrollToSection(e, "projects")}
                 className="inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-white font-medium text-sm hover:bg-primary/90 transition-colors"
               >
                 View My Work
                 <FiArrowRight size={15} />
-              </Link>
-              <Link
-                href="/contact"
+              </a>
+              <a
+                href="#contact"
+                onClick={(e) => scrollToSection(e, "contact")}
                 className="inline-flex items-center gap-2 rounded-lg border border-border bg-surface px-5 py-2.5 font-medium text-sm hover:border-primary/40 hover:text-primary transition-colors"
               >
                 <FiMail size={15} />
                 Let&apos;s Talk
-              </Link>
+              </a>
               <a
                 href={personal.resume}
                 download="Zohaib_Safdar_Resume.pdf"
-                className="inline-flex items-center gap-2 rounded-lg px-5 py-2.5 font-medium text-sm text-muted hover:text-fg transition-colors"
+                className="inline-flex items-center gap-2 rounded-lg border border-border px-5 py-2.5 font-medium text-sm text-muted hover:text-fg transition-colors"
               >
                 <FiDownload size={15} />
                 Resume
@@ -144,11 +154,6 @@ export default function Hero() {
 
         </div>
 
-        {/* Scroll indicator */}
-        <div className="hidden md:flex flex-col items-center gap-2 mt-16 text-muted">
-          <span className="text-[10px] uppercase tracking-widest font-medium">Scroll</span>
-          <div className="h-8 w-px bg-gradient-to-b from-border to-transparent" />
-        </div>
       </div>
     </section>
   );
