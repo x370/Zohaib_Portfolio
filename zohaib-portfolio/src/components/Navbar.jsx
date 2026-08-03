@@ -49,19 +49,19 @@ export default function Navbar() {
         className={`fixed top-0 inset-x-0 z-40 transition-all duration-300 ${
           scrolled
             ? "bg-surface/90 backdrop-blur-md border-b border-border shadow-card"
-            : "bg-surface/60 backdrop-blur-sm sm:bg-transparent"
+            : "bg-surface/80 backdrop-blur-md sm:bg-transparent"
         }`}
       >
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-          <nav className="flex items-center justify-between h-16">
+          <nav className="flex items-center justify-between h-16 gap-2">
             {/* Brand Logo */}
-            <Link href="/" className="flex items-center gap-2.5 group">
-              <div className="h-9 w-9 rounded-xl bg-primary grid place-items-center shadow-md shadow-primary/20 group-hover:scale-105 transition-transform">
+            <Link href="/" className="flex items-center gap-2.5 group shrink-0">
+              <div className="h-9 w-9 rounded-xl bg-primary grid place-items-center shadow-md shadow-primary/20 group-hover:scale-105 transition-transform shrink-0">
                 <span className="font-bold text-white text-sm">ZS</span>
               </div>
               <div className="flex flex-col">
                 <span className="font-bold text-sm leading-none text-fg">Zohaib Safdar</span>
-                <span className="text-[10px] text-muted font-medium mt-0.5">Full-Stack Developer</span>
+                <span className="text-[10px] text-muted font-medium mt-0.5 hidden sm:block">Full-Stack Developer</span>
               </div>
             </Link>
 
@@ -86,14 +86,14 @@ export default function Navbar() {
               })}
             </ul>
 
-            {/* Right Controls */}
-            <div className="flex items-center gap-2">
+            {/* Right Controls (Theme toggle & Hamburger button) */}
+            <div className="flex items-center gap-2 shrink-0">
               <ThemeToggle />
-              {/* Hamburger Button for Mobile & Tablet (Hidden on lg: 1024px+) */}
+              {/* Hamburger Button for Mobile & Tablet */}
               <button
                 aria-label="Toggle navigation drawer"
                 onClick={() => setOpen(true)}
-                className="lg:hidden h-10 w-10 rounded-xl border border-border flex items-center justify-center text-fg hover:border-primary/40 hover:text-primary transition-colors bg-surface"
+                className="lg:hidden h-9 w-9 sm:h-10 sm:w-10 rounded-xl border border-border flex items-center justify-center text-fg hover:border-primary/40 hover:text-primary transition-colors bg-surface shrink-0"
               >
                 <HiBars3 size={22} />
               </button>
@@ -119,7 +119,7 @@ export default function Navbar() {
             <div>
               <div className="flex items-center justify-between pb-6 border-b border-border mb-6">
                 <div className="flex items-center gap-2.5">
-                  <div className="h-9 w-9 rounded-xl bg-primary grid place-items-center text-white font-bold text-sm">
+                  <div className="h-9 w-9 rounded-xl bg-primary grid place-items-center text-white font-bold text-sm shrink-0">
                     ZS
                   </div>
                   <div>
@@ -130,7 +130,7 @@ export default function Navbar() {
                 <button
                   aria-label="Close drawer"
                   onClick={() => setOpen(false)}
-                  className="h-9 w-9 rounded-xl border border-border flex items-center justify-center text-muted hover:text-fg hover:bg-fg/5 transition-colors"
+                  className="h-9 w-9 rounded-xl border border-border flex items-center justify-center text-muted hover:text-fg hover:bg-fg/5 transition-colors shrink-0"
                 >
                   <HiXMark size={20} />
                 </button>
