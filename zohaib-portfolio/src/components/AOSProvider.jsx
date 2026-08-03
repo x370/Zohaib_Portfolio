@@ -7,18 +7,12 @@ import "aos/dist/aos.css";
 export default function AOSProvider({ children }) {
   useEffect(() => {
     AOS.init({
-      duration: 900,
-      once: false,
-      mirror: true,
-      easing: "ease-out-cubic",
-      offset: 80,
-      delay: 0,
+      duration: 500,
+      once: true,
+      mirror: false,
+      easing: "ease-out",
+      offset: 40,
     });
-
-    // Re-init on route change to pick up new nodes
-    const handle = () => AOS.refreshHard();
-    window.addEventListener("load", handle);
-    return () => window.removeEventListener("load", handle);
   }, []);
 
   return <>{children}</>;

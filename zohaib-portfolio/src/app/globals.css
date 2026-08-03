@@ -128,7 +128,9 @@ body {
   }
 }
 
-/* AOS — only allow fade/slide-up, keep duration short */
+/* AOS — short clean transitions, default to visible */
 [data-aos] {
   transition-duration: 400ms !important;
+  transition-property: transform, opacity !important;
 }
+
