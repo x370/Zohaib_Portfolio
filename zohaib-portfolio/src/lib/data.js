@@ -9,7 +9,7 @@ export const personal = {
   github: "https://github.com/x370",
   linkedin: "https://www.linkedin.com/in/zohaib-developer/",
   image: "/profile.jpg",
-  resume: "/resume.pdf",
+  resume: "/Zohaib_Safdar_Resume_Updated.pdf",
   years: 3,
   summary:
     "Full-Stack Developer with 3+ years of experience building end-to-end web applications using React.js, Next.js, Node.js, and NestJS, with hands-on experience integrating AI capabilities including RAG chatbots, LLM fine-tuning, and local model deployment (Ollama, GPT4All).",
