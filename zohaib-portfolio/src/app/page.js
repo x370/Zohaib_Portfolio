@@ -168,37 +168,18 @@ export default function SinglePagePortfolio() {
             subtitle="A short story about how I got here and what drives my work."
           />
 
-          {/* Intro grid */}
-          <div className="grid lg:grid-cols-2 gap-10 mb-16">
-            {/* Photo */}
-            <div data-aos="fade-right" className="flex justify-center lg:justify-start">
-              <div className="relative w-72 sm:w-80">
-                <div className="rounded-2xl overflow-hidden border border-border shadow-card-hover aspect-[4/5]">
-                  <Image
-                    src={personal.image}
-                    alt={personal.name}
-                    fill
-                    sizes="(max-width: 1024px) 320px, 320px"
-                    className="object-cover"
-                  />
-                </div>
-                <div className="absolute -bottom-4 -right-4 card-elevated rounded-xl px-4 py-3 shadow-card-hover">
-                  <p className="text-xs text-muted font-medium">Experience</p>
-                  <p className="text-xl font-bold text-primary">3+ Years</p>
-                </div>
-              </div>
-            </div>
-
-            {/* Copy */}
-            <div className="space-y-6" data-aos="fade-left">
-              <div>
-                <p className="text-xs font-semibold uppercase tracking-widest text-primary mb-3">
+          {/* Intro copy & info */}
+          <div className="card-elevated rounded-2xl p-8 sm:p-10 mb-16" data-aos="fade-up">
+            <div className="grid lg:grid-cols-12 gap-8 items-start">
+              {/* Copy */}
+              <div className="lg:col-span-7 space-y-4">
+                <p className="text-xs font-semibold uppercase tracking-widest text-primary">
                   My Story
                 </p>
-                <h3 className="text-2xl font-bold mb-4 text-fg">
+                <h3 className="text-2xl sm:text-3xl font-bold text-fg leading-tight">
                   I build software that <span className="text-primary">earns trust</span>.
                 </h3>
-                <div className="space-y-3 text-muted leading-relaxed text-sm">
+                <div className="space-y-3 text-muted leading-relaxed text-sm pt-1">
                   <p>
                     I&apos;m a Full-Stack Developer based in{" "}
                     <span className="text-fg font-medium">Lahore, Pakistan</span> with
@@ -217,44 +198,49 @@ export default function SinglePagePortfolio() {
                     to ORM, cutting query time by 40%, and building Docker CI/CD pipelines.
                   </p>
                 </div>
+
+                {/* CTAs */}
+                <div className="flex flex-wrap gap-3 pt-3">
+                  <button
+                    onClick={() => scrollToSection("contact")}
+                    className="inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-white font-medium text-sm hover:bg-primary/90 transition-colors"
+                  >
+                    Hire Me
+                    <FiArrowRight size={14} />
+                  </button>
+                  <a
+                    href={personal.resume}
+                    download="Zohaib_Safdar_Resume.pdf"
+                    className="inline-flex items-center gap-2 rounded-lg border border-border px-5 py-2.5 font-medium text-sm hover:border-primary/40 hover:text-primary transition-colors"
+                  >
+                    <FiDownload size={14} /> Download CV
+                  </a>
+                </div>
               </div>
 
-              {/* Quick info */}
-              <div className="grid sm:grid-cols-2 gap-3">
-                {[
-                  { icon: FiMapPin, label: "Location", value: personal.location },
-                  { icon: FiMail, label: "Email", value: personal.email },
-                  { icon: FiPhone, label: "Phone", value: personal.phone },
-                  { icon: FiCalendar, label: "Availability", value: "Open to work" },
-                ].map((item) => (
-                  <div key={item.label} className="card rounded-xl p-3.5 flex items-center gap-3">
-                    <div className="h-8 w-8 rounded-lg bg-primary/10 grid place-items-center">
-                      <item.icon size={15} className="text-primary" />
+              {/* Quick info grid */}
+              <div className="lg:col-span-5 space-y-3">
+                <p className="text-xs font-semibold uppercase tracking-widest text-primary mb-2">
+                  Quick Details
+                </p>
+                <div className="grid sm:grid-cols-2 lg:grid-cols-1 gap-3">
+                  {[
+                    { icon: FiMapPin, label: "Location", value: personal.location },
+                    { icon: FiMail, label: "Email", value: personal.email },
+                    { icon: FiPhone, label: "Phone", value: personal.phone },
+                    { icon: FiCalendar, label: "Availability", value: "Open to work" },
+                  ].map((item) => (
+                    <div key={item.label} className="card rounded-xl p-3.5 flex items-center gap-3">
+                      <div className="h-8 w-8 rounded-lg bg-primary/10 grid place-items-center shrink-0">
+                        <item.icon size={15} className="text-primary" />
+                      </div>
+                      <div className="min-w-0">
+                        <p className="text-[10px] uppercase tracking-wider text-muted font-semibold">{item.label}</p>
+                        <p className="text-sm font-medium text-fg truncate">{item.value}</p>
+                      </div>
                     </div>
-                    <div className="min-w-0">
-                      <p className="text-[10px] uppercase tracking-wider text-muted font-semibold">{item.label}</p>
-                      <p className="text-sm font-medium text-fg truncate">{item.value}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              {/* CTAs */}
-              <div className="flex flex-wrap gap-3 pt-1">
-                <button
-                  onClick={() => scrollToSection("contact")}
-                  className="inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-white font-medium text-sm hover:bg-primary/90 transition-colors"
-                >
-                  Hire Me
-                  <FiArrowRight size={14} />
-                </button>
-                <a
-                  href={personal.resume}
-                  download="Zohaib_Safdar_Resume.pdf"
-                  className="inline-flex items-center gap-2 rounded-lg border border-border px-5 py-2.5 font-medium text-sm hover:border-primary/40 hover:text-primary transition-colors"
-                >
-                  <FiDownload size={14} /> Download CV
-                </a>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
