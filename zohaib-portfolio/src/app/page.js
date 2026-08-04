@@ -107,6 +107,8 @@ const projectFilterMap = {
   Featured: (p) => p.featured,
 };
 
+const whatsappNumber = personal.phone.replace(/[\s\-+]/g, ""); // strips +92 302-2375072 → 923022375072
+
 const contactsList = [
   { icon: FiMail, label: "Email", value: personal.email, href: `mailto:${personal.email}` },
   { icon: FiPhone, label: "Phone", value: personal.phone, href: `tel:${personal.phone.replace(/\s/g, "")}` },
@@ -554,9 +556,17 @@ export default function SinglePagePortfolio() {
                   Direct Channels
                 </p>
                 <h3 className="font-bold text-base text-fg mb-4">Prefer talking directly?</h3>
-                <p className="text-sm text-muted leading-relaxed mb-5">
-                  I reply fastest on email. For urgent chats, WhatsApp works too
-                  — just use the phone number below.
+                <p className="text-sm text-muted leading-relaxed mb-4">
+                  I reply fastest on email. For urgent chats,{" "}
+                  <a
+                    href={`https://wa.me/${whatsappNumber}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-primary font-medium hover:underline"
+                  >
+                    WhatsApp
+                  </a>{" "}
+                  works too — I&apos;m usually available within a few hours.
                 </p>
                 <div className="space-y-2.5">
                   {contactsList.map((c) => (

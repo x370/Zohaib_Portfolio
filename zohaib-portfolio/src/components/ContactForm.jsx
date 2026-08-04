@@ -7,7 +7,9 @@ import {
   FiCheckCircle, FiAlertCircle,
 } from "react-icons/fi";
 
-const FORMSPREE_FORM_ID = "YOUR_FORMSPREE_ID"; // ← formspree.io pe sign up kar ke apna ID yahan daalen
+// ⚠️  Replace "YOUR_FORMSPREE_ID" with your real ID from https://formspree.io
+// e.g. "xpwzgkjd". Once set, the form will work without any backend code.
+const FORMSPREE_FORM_ID = "YOUR_FORMSPREE_ID";
 
 export default function ContactForm() {
   const [form, setForm] = useState({ name: "", email: "", subject: "", message: "" });
@@ -40,12 +42,30 @@ export default function ContactForm() {
   const inputClass =
     "w-full bg-bg border border-border rounded-lg pl-10 pr-4 py-3 text-sm outline-none transition-all focus:border-primary focus:ring-2 focus:ring-primary/15 placeholder:text-muted/60";
 
+  const isFormActive = FORMSPREE_FORM_ID !== "YOUR_FORMSPREE_ID";
+
   return (
     <form
       onSubmit={handleSubmit}
       className="card-elevated rounded-xl p-6 sm:p-8"
     >
-      <h3 className="font-bold text-lg text-fg mb-6">Send a Message</h3>
+      <h3 className="font-bold text-lg text-fg mb-1">Send a Message</h3>
+
+      {/* Fallback notice when Formspree is not yet configured */}
+      {!isFormActive && (
+        <div className="mb-5 flex items-start gap-2.5 rounded-lg bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 p-3.5">
+          <svg className="mt-0.5 h-4 w-4 shrink-0 text-amber-600 dark:text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          <p className="text-xs text-amber-700 dark:text-amber-400 leading-relaxed">
+            The contact form isn&apos;t connected yet. To get in touch, please email me directly at{" "}
+            <a href="mailto:za789688@gmail.com" className="font-semibold underline">
+              za789688@gmail.com
+            </a>
+            .
+          </p>
+        </div>
+      )}
 
       <div className="grid gap-4">
         {/* Name + Email */}

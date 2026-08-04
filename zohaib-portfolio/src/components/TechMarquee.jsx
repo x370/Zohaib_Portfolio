@@ -6,8 +6,9 @@ import {
   SiDocker, SiTailwindcss, SiSass, SiExpress,
   SiGithubactions, SiGit, SiPython, SiSwagger,
   SiJsonwebtokens, SiPostman, SiMui, SiLinux,
-  SiGo, SiAmazon,
+  SiGo,
 } from "react-icons/si";
+import { FaAws } from "react-icons/fa";
 
 const techs = [
   { Icon: SiReact, label: "React", color: "#61DAFB" },
@@ -32,7 +33,7 @@ const techs = [
   { Icon: SiMui, label: "Material UI", color: "#007FFF" },
   { Icon: SiLinux, label: "Linux", color: null },
   { Icon: SiGo, label: "Go", color: "#00ADD8" },
-  { Icon: SiAmazon, label: "AWS", color: "#FF9900" },
+  { Icon: FaAws, label: "AWS", color: "#FF9900" },
   { Icon: null, label: "Ollama", color: null },
   { Icon: null, label: "GPT4All", color: null },
   { Icon: null, label: "Java", color: null },
@@ -51,7 +52,9 @@ export default function TechMarquee() {
             {t.Icon ? (
               <t.Icon size={18} style={t.color ? { color: t.color } : { color: "currentColor" }} />
             ) : (
-              <span className="text-xs font-bold text-primary">AI</span>
+              <span className="inline-flex items-center rounded-md bg-primary/15 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-primary leading-none">
+                AI
+              </span>
             )}
             <span className="text-sm text-muted font-medium">{t.label}</span>
           </div>

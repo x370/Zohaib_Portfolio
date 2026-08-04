@@ -19,7 +19,7 @@ export const stats = [
   { label: "Years of Experience", value: "3+", suffix: "" },
   { label: "Projects Delivered", value: "11", suffix: "+" },
   { label: "Clients Trained", value: "10", suffix: "+" },
-  { label: "Bugs Resolved", value: "50", suffix: "+" },
+  { label: "Issues Resolved", value: "50", suffix: "+" },
 ];
 
 export const skills = {
