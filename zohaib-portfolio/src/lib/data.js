@@ -216,7 +216,7 @@ export const projects = [
     featured: false,
     color: "gold",
     github: "",
-    live: "",
+    live: "https://dev-centurion.scpng.crossnode.it/auth/login",
   },
   {
     title: "WRB Population Management",
@@ -242,7 +242,7 @@ export const projects = [
     featured: false,
     color: "accent",
     github: "",
-    live: "",
+    live: "https://app.fuelbook.pk/",
   },
   {
     title: "EduBirds",
@@ -255,7 +255,7 @@ export const projects = [
     featured: false,
     color: "gold",
     github: "",
-    live: "",
+    live: "https://www.edbirdoverseas.com/",
   },
   {
     title: "E-Commerce Platform",
